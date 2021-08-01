@@ -97,9 +97,7 @@ def get_upload_id(base_url, api_key, channel_id):
 
 if __name__ == "__main__":
     upload_id = get_upload_id(yt_base_url, yt_api_key, yt_channel_id)
-    print(upload_id)
     videos = get_recent_videos(yt_base_url, yt_api_key, upload_id)
-    print(videos)
     update_gist_for_youtube(
         gh_base_url, gist_id, gh_api_key, "latest_videos", "latest_videos.md", videos
     )
