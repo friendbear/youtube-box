@@ -1,0 +1,27 @@
+name: Update gist with latest YouTube videos
+on:
+  schedule:
+    - cron: "1 */7 * * *"
+  
+jobs:
+  update-gist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@master
+
+      - name: "Setup Python"
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: "Pip install"
+        run: pip install -r requirements.txt
+
+      - name: "Update gist"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: a35668c606586a7b7bd511e57162d8bc
+          CHANNEL_ID: UCy-qm3KKxODQOQ88RGbjEkQ
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python main.py
